@@ -1,0 +1,1256 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <title></title>
+    <script src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/7.0.0/polyfill.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <script type="text/babel">
+
+        const monthText = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "November",
+        "December"
+        ]
+
+        const codeTable = {
+        'AF': 'Afghanistan',
+        'AX': 'Aland Islands',
+        'AL': 'Albania',
+        'DZ': 'Algeria',
+        'AS': 'American Samoa',
+        'AD': 'Andorra',
+        'AO': 'Angola',
+        'AI': 'Anguilla',
+        'AQ': 'Antarctica',
+        'AG': 'Antigua And Barbuda',
+        'AR': 'Argentina',
+        'AM': 'Armenia',
+        'AW': 'Aruba',
+        'AU': 'Australia',
+        'AT': 'Austria',
+        'AZ': 'Azerbaijan',
+        'BS': 'Bahamas',
+        'BH': 'Bahrain',
+        'BD': 'Bangladesh',
+        'BB': 'Barbados',
+        'BY': 'Belarus',
+        'BE': 'Belgium',
+        'BZ': 'Belize',
+        'BJ': 'Benin',
+        'BM': 'Bermuda',
+        'BT': 'Bhutan',
+        'BO': 'Bolivia',
+        'BA': 'Bosnia And Herzegovina',
+        'BW': 'Botswana',
+        'BV': 'Bouvet Island',
+        'BR': 'Brazil',
+        'IO': 'British Indian Ocean Territory',
+        'BN': 'Brunei Darussalam',
+        'BG': 'Bulgaria',
+        'BF': 'Burkina Faso',
+        'BI': 'Burundi',
+        'KH': 'Cambodia',
+        'CM': 'Cameroon',
+        'CA': 'Canada',
+        'CV': 'Cape Verde',
+        'KY': 'Cayman Islands',
+        'CF': 'Central African Republic',
+        'TD': 'Chad',
+        'CL': 'Chile',
+        'CN': 'China',
+        'CX': 'Christmas Island',
+        'CC': 'Cocos (Keeling) Islands',
+        'CO': 'Colombia',
+        'KM': 'Comoros',
+        'CG': 'Congo',
+        'CD': 'Congo, Democratic Republic',
+        'CK': 'Cook Islands',
+        'CR': 'Costa Rica',
+        'CI': 'Cote D\'Ivoire',
+        'HR': 'Croatia',
+        'CU': 'Cuba',
+        'CY': 'Cyprus',
+        'CZ': 'Czech Republic',
+        'DK': 'Denmark',
+        'DJ': 'Djibouti',
+        'DM': 'Dominica',
+        'DO': 'Dominican Republic',
+        'EC': 'Ecuador',
+        'EG': 'Egypt',
+        'SV': 'El Salvador',
+        'GQ': 'Equatorial Guinea',
+        'ER': 'Eritrea',
+        'EE': 'Estonia',
+        'ET': 'Ethiopia',
+        'FK': 'Falkland Islands (Malvinas)',
+        'FO': 'Faroe Islands',
+        'FJ': 'Fiji',
+        'FI': 'Finland',
+        'FR': 'France',
+        'GF': 'French Guiana',
+        'PF': 'French Polynesia',
+        'TF': 'French Southern Territories',
+        'GA': 'Gabon',
+        'GM': 'Gambia',
+        'GE': 'Georgia',
+        'DE': 'Germany',
+        'GH': 'Ghana',
+        'GI': 'Gibraltar',
+        'GR': 'Greece',
+        'GL': 'Greenland',
+        'GD': 'Grenada',
+        'GP': 'Guadeloupe',
+        'GU': 'Guam',
+        'GT': 'Guatemala',
+        'GG': 'Guernsey',
+        'GN': 'Guinea',
+        'GW': 'Guinea-Bissau',
+        'GY': 'Guyana',
+        'HT': 'Haiti',
+        'HM': 'Heard Island & Mcdonald Islands',
+        'VA': 'Holy See (Vatican City State)',
+        'HN': 'Honduras',
+        'HK': 'Hong Kong',
+        'HU': 'Hungary',
+        'IS': 'Iceland',
+        'IN': 'India',
+        'ID': 'Indonesia',
+        'IR': 'Iran, Islamic Republic Of',
+        'IQ': 'Iraq',
+        'IE': 'Ireland',
+        'IM': 'Isle Of Man',
+        'IL': 'Israel',
+        'IT': 'Italy',
+        'JM': 'Jamaica',
+        'JP': 'Japan',
+        'JE': 'Jersey',
+        'JO': 'Jordan',
+        'KZ': 'Kazakhstan',
+        'KE': 'Kenya',
+        'KI': 'Kiribati',
+        'KR': 'Korea',
+        'KW': 'Kuwait',
+        'KG': 'Kyrgyzstan',
+        'LA': 'Lao People\'s Democratic Republic',
+        'LV': 'Latvia',
+        'LB': 'Lebanon',
+        'LS': 'Lesotho',
+        'LR': 'Liberia',
+        'LY': 'Libyan Arab Jamahiriya',
+        'LI': 'Liechtenstein',
+        'LT': 'Lithuania',
+        'LU': 'Luxembourg',
+        'MO': 'Macao',
+        'MK': 'Macedonia',
+        'MG': 'Madagascar',
+        'MW': 'Malawi',
+        'MY': 'Malaysia',
+        'MV': 'Maldives',
+        'ML': 'Mali',
+        'MT': 'Malta',
+        'MH': 'Marshall Islands',
+        'MQ': 'Martinique',
+        'MR': 'Mauritania',
+        'MU': 'Mauritius',
+        'YT': 'Mayotte',
+        'MX': 'Mexico',
+        'FM': 'Micronesia, Federated States Of',
+        'MD': 'Moldova',
+        'MC': 'Monaco',
+        'MN': 'Mongolia',
+        'ME': 'Montenegro',
+        'MS': 'Montserrat',
+        'MA': 'Morocco',
+        'MZ': 'Mozambique',
+        'MM': 'Myanmar',
+        'NA': 'Namibia',
+        'NR': 'Nauru',
+        'NP': 'Nepal',
+        'NL': 'Netherlands',
+        'AN': 'Netherlands Antilles',
+        'NC': 'New Caledonia',
+        'NZ': 'New Zealand',
+        'NI': 'Nicaragua',
+        'NE': 'Niger',
+        'NG': 'Nigeria',
+        'NU': 'Niue',
+        'NF': 'Norfolk Island',
+        'MP': 'Northern Mariana Islands',
+        'NO': 'Norway',
+        'OM': 'Oman',
+        'PK': 'Pakistan',
+        'PW': 'Palau',
+        'PS': 'Palestinian Territory, Occupied',
+        'PA': 'Panama',
+        'PG': 'Papua New Guinea',
+        'PY': 'Paraguay',
+        'PE': 'Peru',
+        'PH': 'Philippines',
+        'PN': 'Pitcairn',
+        'PL': 'Poland',
+        'PT': 'Portugal',
+        'PR': 'Puerto Rico',
+        'QA': 'Qatar',
+        'RE': 'Reunion',
+        'RO': 'Romania',
+        'RU': 'Russian Federation',
+        'RW': 'Rwanda',
+        'BL': 'Saint Barthelemy',
+        'SH': 'Saint Helena',
+        'KN': 'Saint Kitts And Nevis',
+        'LC': 'Saint Lucia',
+        'MF': 'Saint Martin',
+        'PM': 'Saint Pierre And Miquelon',
+        'VC': 'Saint Vincent And Grenadines',
+        'WS': 'Samoa',
+        'SM': 'San Marino',
+        'ST': 'Sao Tome And Principe',
+        'SA': 'Saudi Arabia',
+        'SN': 'Senegal',
+        'RS': 'Serbia',
+        'SC': 'Seychelles',
+        'SL': 'Sierra Leone',
+        'SG': 'Singapore',
+        'SK': 'Slovakia',
+        'SI': 'Slovenia',
+        'SB': 'Solomon Islands',
+        'SO': 'Somalia',
+        'ZA': 'South Africa',
+        'GS': 'South Georgia And Sandwich Isl.',
+        'ES': 'Spain',
+        'LK': 'Sri Lanka',
+        'SD': 'Sudan',
+        'SR': 'Suriname',
+        'SJ': 'Svalbard And Jan Mayen',
+        'SZ': 'Swaziland',
+        'SE': 'Sweden',
+        'CH': 'Switzerland',
+        'SY': 'Syrian Arab Republic',
+        'TW': 'Taiwan',
+        'TJ': 'Tajikistan',
+        'TZ': 'Tanzania',
+        'TH': 'Thailand',
+        'TL': 'Timor-Leste',
+        'TG': 'Togo',
+        'TK': 'Tokelau',
+        'TO': 'Tonga',
+        'TT': 'Trinidad And Tobago',
+        'TN': 'Tunisia',
+        'TR': 'Turkey',
+        'TM': 'Turkmenistan',
+        'TC': 'Turks And Caicos Islands',
+        'TV': 'Tuvalu',
+        'UG': 'Uganda',
+        'UA': 'Ukraine',
+        'AE': 'United Arab Emirates',
+        'GB': 'United Kingdom',
+        'US': 'United States',
+        'UM': 'United States Outlying Islands',
+        'UY': 'Uruguay',
+        'UZ': 'Uzbekistan',
+        'VU': 'Vanuatu',
+        'VE': 'Venezuela',
+        'VN': 'Viet Nam',
+        'VG': 'Virgin Islands, British',
+        'VI': 'Virgin Islands, U.S.',
+        'WF': 'Wallis And Futuna',
+        'EH': 'Western Sahara',
+        'YE': 'Yemen',
+        'ZM': 'Zambia',
+        'ZW': 'Zimbabwe'
+        };
+
+        const countryTable = {
+        'Afghanistan': 'AF',
+        'Aland Islands': 'AX',
+        'Albania': 'AL',
+        'Algeria': 'DZ',
+        'American Samoa': 'AS',
+        'Andorra': 'AD',
+        'Angola': 'AO',
+        'Anguilla': 'AI',
+        'Antarctica': 'AQ',
+        'Antigua And Barbuda': 'AG',
+        'Argentina': 'AR',
+        'Armenia': 'AM',
+        'Aruba': 'AW',
+        'Australia': 'AU',
+        'Austria': 'AT',
+        'Azerbaijan': 'AZ',
+        'Bahamas': 'BS',
+        'Bahrain': 'BH',
+        'Bangladesh': 'BD',
+        'Barbados': 'BB',
+        'Belarus': 'BY',
+        'Belgium': 'BE',
+        'Belize': 'BZ',
+        'Benin': 'BJ',
+        'Bermuda': 'BM',
+        'Bhutan': 'BT',
+        'Bolivia': 'BO',
+        'Bosnia And Herzegovina': 'BA',
+        'Botswana': 'BW',
+        'Bouvet Island': 'BV',
+        'Brazil': 'BR',
+        'British Indian Ocean Territory': 'IO',
+        'Brunei Darussalam': 'BN',
+        'Bulgaria': 'BG',
+        'Burkina Faso': 'BF',
+        'Burundi': 'BI',
+        'Cambodia': 'KH',
+        'Cameroon': 'CM',
+        'Canada': 'CA',
+        'Cape Verde': 'CV',
+        'Cayman Islands': 'KY',
+        'Central African Republic': 'CF',
+        'Chad': 'TD',
+        'Chile': 'CL',
+        'China': 'CN',
+        'Christmas Island': 'CX',
+        'Cocos (Keeling) Islands': 'CC',
+        'Colombia': 'CO',
+        'Comoros': 'KM',
+        'Congo': 'CG',
+        'Congo, Democratic Republic': 'CD',
+        'Cook Islands': 'CK',
+        'Costa Rica': 'CR',
+        'Cote D\'Ivoire': 'CI',
+        'Croatia': 'HR',
+        'Cuba': 'CU',
+        'Cyprus': 'CY',
+        'Czech Republic': 'CZ',
+        'Denmark': 'DK',
+        'Djibouti': 'DJ',
+        'Dominica': 'DM',
+        'Dominican Republic': 'DO',
+        'Ecuador': 'EC',
+        'Egypt': 'EG',
+        'El Salvador': 'SV',
+        'Equatorial Guinea': 'GQ',
+        'Eritrea': 'ER',
+        'Estonia': 'EE',
+        'Ethiopia': 'ET',
+        'Falkland Islands': 'FK',
+        'Faroe Islands': 'FO',
+        'Fiji': 'FJ',
+        'Finland': 'FI',
+        'France': 'FR',
+        'French Guiana': 'GF',
+        'French Polynesia': 'PF',
+        'French Southern Territories': 'TF',
+        'Gabon': 'GA',
+        'Gambia': 'GM',
+        'Georgia': 'GE',
+        'Germany': 'DE',
+        'Ghana': 'GH',
+        'Gibraltar': 'GI',
+        'Greece': 'GR',
+        'Greenland': 'GL',
+        'Grenada': 'GD',
+        'Guadeloupe': 'GP',
+        'Guam': 'GU',
+        'Guatemala': 'GT',
+        'Guernsey': 'GG',
+        'Guinea': 'GN',
+        'Guinea-Bissau': 'GW',
+        'Guyana': 'GY',
+        'Haiti': 'HT',
+        'Heard Island & Mcdonald Islands': 'HM',
+        'Holy See (Vatican City State)': 'VA',
+        'Honduras': 'HN',
+        'Hong Kong': 'HK',
+        'Hungary': 'HU',
+        'Iceland': 'IS',
+        'India': 'IN',
+        'Indonesia': 'ID',
+        'Iran, Islamic Republic Of': 'IR',
+        'Iraq': 'IQ',
+        'Ireland': 'IE',
+        'Isle Of Man': 'IM',
+        'Israel': 'IL',
+        'Italy': 'IT',
+        'Jamaica': 'JM',
+        'Japan': 'JP',
+        'Jersey': 'JE',
+        'Jordan': 'JO',
+        'Kazakhstan': 'KZ',
+        'Kenya': 'KE',
+        'Kiribati': 'KI',
+        'Korea': 'KR',
+        'Kuwait': 'KW',
+        'Kyrgyzstan': 'KG',
+        'Lao People\'s Democratic Republic': 'LA',
+        'Latvia': 'LV',
+        'Lebanon': 'LB',
+        'Lesotho': 'LS',
+        'Liberia': 'LR',
+        'Libyan Arab Jamahiriya': 'LY',
+        'Liechtenstein': 'LI',
+        'Lithuania': 'LT',
+        'Luxembourg': 'LU',
+        'Macao': 'MO',
+        'Macedonia': 'MK',
+        'Madagascar': 'MG',
+        'Malawi': 'MW',
+        'Malaysia': 'MY',
+        'Maldives': 'MV',
+        'Mali': 'ML',
+        'Malta': 'MT',
+        'Marshall Islands': 'MH',
+        'Martinique': 'MQ',
+        'Mauritania': 'MR',
+        'Mauritius': 'MU',
+        'Mayotte': 'YT',
+        'Mexico': 'MX',
+        'Micronesia, Federated States Of': 'FM',
+        'Moldova': 'MD',
+        'Monaco': 'MC',
+        'Mongolia': 'MN',
+        'Montenegro': 'ME',
+        'Montserrat': 'MS',
+        'Morocco': 'MA',
+        'Mozambique': 'MZ',
+        'Myanmar': 'MM',
+        'Namibia': 'NA',
+        'Nauru': 'NR',
+        'Nepal': 'NP',
+        'Netherlands': 'NL',
+        'Netherlands Antilles': 'AN',
+        'New Caledonia': 'NC',
+        'New Zealand': 'NZ',
+        'Nicaragua': 'NI',
+        'Niger': 'NE',
+        'Nigeria': 'NG',
+        'Niue': 'NU',
+        'Norfolk Island': 'NF',
+        'Northern Mariana Islands': 'MP',
+        'Norway': 'NO',
+        'Oman': 'OM',
+        'Pakistan': 'PK',
+        'Palau': 'PW',
+        'Palestinian Territory, Occupied': 'PS',
+        'Panama': 'PA',
+        'Papua New Guinea': 'PG',
+        'Paraguay': 'PY',
+        'Peru': 'PE',
+        'Philippines': 'PH',
+        'Pitcairn': 'PN',
+        'Poland': 'PL',
+        'Portugal': 'PT',
+        'Puerto Rico': 'PR',
+        'Qatar': 'QA',
+        'Reunion': 'RE',
+        'Romania': 'RO',
+        'Russian Federation': 'RU',
+        'Rwanda': 'RW',
+        'Saint Barthelemy': 'BL',
+        'Saint Helena': 'SH',
+        'Saint Kitts And Nevis': 'KN',
+        'Saint Lucia': 'LC',
+        'Saint Martin': 'MF',
+        'Saint Pierre And Miquelon': 'PM',
+        'Saint Vincent And Grenadines': 'VC',
+        'Samoa': 'WS',
+        'San Marino': 'SM',
+        'Sao Tome And Principe': 'ST',
+        'Saudi Arabia': 'SA',
+        'Senegal': 'SN',
+        'Serbia': 'RS',
+        'Seychelles': 'SC',
+        'Sierra Leone': 'SL',
+        'Singapore': 'SG',
+        'Slovakia': 'SK',
+        'Slovenia': 'SI',
+        'Solomon Islands': 'SB',
+        'Somalia': 'SO',
+        'South Africa': 'ZA',
+        'South Georgia And Sandwich Isl.': 'GS',
+        'Spain': 'ES',
+        'Sri Lanka': 'LK',
+        'Sudan': 'SD',
+        'Suriname': 'SR',
+        'Svalbard And Jan Mayen': 'SJ',
+        'Swaziland': 'SZ',
+        'Sweden': 'SE',
+        'Switzerland': 'CH',
+        'Syrian Arab Republic': 'SY',
+        'Taiwan': 'TW',
+        'Tajikistan': 'TJ',
+        'Tanzania': 'TZ',
+        'Thailand': 'TH',
+        'Timor-Leste': 'TL',
+        'Togo': 'TG',
+        'Tokelau': 'TK',
+        'Tonga': 'TO',
+        'Trinidad And Tobago': 'TT',
+        'Tunisia': 'TN',
+        'Turkey': 'TR',
+        'Turkmenistan': 'TM',
+        'Turks And Caicos Islands': 'TC',
+        'Tuvalu': 'TV',
+        'Uganda': 'UG',
+        'Ukraine': 'UA',
+        'United Arab Emirates': 'AE',
+        'United Kingdom': 'GB',
+        'United States': 'US',
+        'United States Outlying Islands': 'UM',
+        'Uruguay': 'UY',
+        'Uzbekistan': 'UZ',
+        'Vanuatu': 'VU',
+        'Venezuela': 'VE',
+        'Vietnam': 'VN',
+        'Virgin Islands, British': 'VG',
+        'Virgin Islands, U.S.': 'VI',
+        'Wallis And Futuna': 'WF',
+        'Western Sahara': 'EH',
+        'Yemen': 'YE',
+        'Zambia': 'ZM',
+        'Zimbabwe': 'ZW'
+        }
+
+        const weekConvert = {
+        "01 13":    "31-Dec-2012",
+        "02 13":    "7-Jan-2013",
+        '03 13':    "14-Jan-2013",
+        '04 13':    "21-Jan-2013",
+        '05 13':	"28-Jan-2013",
+        '06 13':	"4-Feb-2013",
+        '07 13':	"11-Feb-2013",
+        '08 13':	"18-Feb-2013",
+        '09 13':	"25-Feb-2013",
+        '10 13':	"4-Mar-2013",
+        '11 13':	"11-Mar-2013",
+        '12 13':	"18-Mar-2013",
+        '13 13':	"25-Mar-2013",
+        '14 13':	"1-Apr-2013",
+        '15 13':	"8-Apr-2013",
+        '16 13':	"15-Apr-2013",
+        '17 13':	"22-Apr-2013",
+        '18 13':	"29-Apr-2013",
+        '19 13':	"6-May-2013",
+        '20 13':	"13-May-2013",
+        '21 13':	"20-May-2013",
+        '22 13':	"27-May-2013",
+        '23 13':	"3-Jun-2013",
+        '24 13':	"10-Jun-2013",
+        '25 13':	"17-Jun-2013",
+        '26 13':	"24-Jun-2013",
+        '27 13':	"1-Jul-2013",
+        '28 13':	"8-Jul-2013",
+        '29 13':	"15-Jul-2013",
+        '30 13':	"22-Jul-2013",
+        '31 13':	"29-Jul-2013",
+        '32 13':	"5-Aug-2013",
+        '33 13':	"12-Aug-2013",
+        '34 13':	"19-Aug-2013",
+        '35 13':	"26-Aug-2013",
+        '36 13':	"2-Sep-2013",
+        '37 13':	"9-Sep-2013",
+        '38 13':	"16-Sep-2013",
+        '39 13':	"23-Sep-2013",
+        '40 13':	"30-Sep-2013",
+        '41 13':	"7-Oct-2013",
+        '42 13':	"14-Oct-2013",
+        '43 13':	"21-Oct-2013",
+        '44 13':	"28-Oct-2013",
+        '45 13':	"4-Nov-2013",
+        '46 13':	"11-Nov-2013",
+        '47 13':	"18-Nov-2013",
+        '48 13':	"25-Nov-2013",
+        '49 13':	"2-Dec-2013",
+        '50 13':	"9-Dec-2013",
+        '51 13':	"16-Dec-2013",
+        '52 13':	"23-Dec-2013",
+        '01 14':	"30-Dec-2013",
+        '02 14':	"6-Jan-2014",
+        '03 14':	"13-Jan-2014",
+        '04 14':	"20-Jan-2014",
+        '05 14':	"27-Jan-2014",
+        '06 14':	"3-Feb-2014",
+        '07 14':	"10-Feb-2014",
+        '08 14':	"17-Feb-2014",
+        '09 14':	"24-Feb-2014",
+        '10 14':	"3-Mar-2014",
+        '11 14':	"10-Mar-2014",
+        '12 14':	"17-Mar-2014",
+        '13 14':	"24-Mar-2014",
+        '14 14':	"31-Mar-2014",
+        '15 14':	"7-Apr-2014",
+        '16 14':	"14-Apr-2014",
+        '17 14':	"21-Apr-2014",
+        '18 14':	"28-Apr-2014",
+        '19 14':	"5-May-2014",
+        '20 14':	"12-May-2014",
+        '21 14':	"19-May-2014",
+        '22 14':	"26-May-2014",
+        '23 14':	"2-Jun-2014",
+        '24 14':	"9-Jun-2014",
+        '25 14':	"16-Jun-2014",
+        '26 14':	"23-Jun-2014",
+        '27 14':	"30-Jun-2014",
+        '28 14':	"7-Jul-2014",
+        '29 14':	"14-Jul-2014",
+        '30 14':	"21-Jul-2014",
+        '31 14':	"28-Jul-2014",
+        '32 14':	"4-Aug-2014",
+        '33 14':	"11-Aug-2014",
+        '34 14':	"18-Aug-2014",
+        '35 14':	"25-Aug-2014",
+        '36 14':	"1-Sep-2014",
+        '37 14':	"8-Sep-2014",
+        '38 14':	"15-Sep-2014",
+        '39 14':	"22-Sep-2014",
+        '40 14':	"29-Sep-2014",
+        '41 14':	"6-Oct-2014",
+        '42 14':	"13-Oct-2014",
+        '43 14':	"20-Oct-2014",
+        '44 14':	"27-Oct-2014",
+        '45 14':	"3-Nov-2014",
+        '46 14':	"10-Nov-2014",
+        '47 14':	"17-Nov-2014",
+        '48 14':	"24-Nov-2014",
+        '49 14':	"1-Dec-2014",
+        '50 14':	"8-Dec-2014",
+        '51 14':	"15-Dec-2014",
+        '52 14':    "22-Dec-2014",
+        '01 15':	"29-Dec-2014",
+        '02 15':	"5-Jan-2015",
+        '03 15':	"12-Jan-2015",
+        '04 15':	"19-Jan-2015",
+        '05 15':	"26-Jan-2015",
+        '06 15':	"2-Feb-2015",
+        '07 15':	"9-Feb-2015",
+        '08 15':	"16-Feb-2015",
+        '09 15':	"23-Feb-2015",
+        '10 15':	"2-Mar-2015",
+        '11 15':	"9-Mar-2015",
+        '12 15':	"16-Mar-2015",
+        '13 15':	"23-Mar-2015",
+        '14 15':	"30-Mar-2015",
+        '15 15':	"6-Apr-2015",
+        '16 15':	"13-Apr-2015",
+        '17 15':	"20-Apr-2015",
+        '18 15':	"27-Apr-2015",
+        '19 15':	"4-May-2015",
+        '20 15':	"11-May-2015",
+        '21 15':	"18-May-2015",
+        '22 15':	"25-May-2015",
+        '23 15':	"1-Jun-2015",
+        '24 15':	"8-Jun-2015",
+        '25 15':	"15-Jun-2015",
+        '26 15':	"22-Jun-2015",
+        '27 15':	"29-Jun-2015",
+        '28 15':	"6-Jul-2015",
+        '29 15':	"13-Jul-2015",
+        '30 15':	"20-Jul-2015",
+        '31 15':	"27-Jul-2015",
+        '32 15':	"3-Aug-2015",
+        '33 15':	"10-Aug-2015",
+        '34 15':	"17-Aug-2015",
+        '35 15':	"24-Aug-2015",
+        '36 15':	"31-Aug-2015",
+        '37 15':	"7-Sep-2015",
+        '38 15':	"14-Sep-2015",
+        '39 15':	"21-Sep-2015",
+        '40 15':	"28-Sep-2015",
+        '41 15':	"5-Oct-2015",
+        '42 15':	"12-Oct-2015",
+        '43 15':	"19-Oct-2015",
+        '44 15':	"26-Oct-2015",
+        '45 15':	"2-Nov-2015",
+        '46 15':	"9-Nov-2015",
+        '47 15':	"16-Nov-2015",
+        '48 15':	"23-Nov-2015",
+        '49 15':	"30-Nov-2015",
+        '50 15':	"7-Dec-2015",
+        '51 15':	"14-Dec-2015",
+        '52 15':	"21-Dec-2015",
+        '53 15':	"28-Dec-2015",
+        '01 16':	"4-Jan-2016",
+        '02 16':	"11-Jan-2016",
+        '03 16':	"18-Jan-2016",
+        '04 16':	"25-Jan-2016",
+        '05 16':	"1-Feb-2016",
+        '06 16':	"8-Feb-2016",
+        '07 16':	"15-Feb-2016",
+        '08 16':	"22-Feb-2016",
+        '09 16':	"29-Feb-2016",
+        '10 16':	"7-Mar-2016",
+        '11 16':	"14-Mar-2016",
+        '12 16':	"21-Mar-2016",
+        '13 16':	"28-Mar-2016",
+        '14 16':	"4-Apr-2016",
+        '15 16':	"11-Apr-2016",
+        '16 16':	"18-Apr-2016",
+        '17 16':	"25-Apr-2016",
+        '18 16':	"2-May-2016",
+        '19 16':	"9-May-2016",
+        '20 16':	"16-May-2016",
+        '21 16':	"23-May-2016",
+        '22 16':	"30-May-2016",
+        '23 16':	"6-Jun-2016",
+        '24 16':	"13-Jun-2016",
+        '25 16':	"20-Jun-2016",
+        '26 16':	"27-Jun-2016",
+        '27 16':	"4-Jul-2016",
+        '28 16':	"11-Jul-2016",
+        '29 16':	"18-Jul-2016",
+        '30 16':	"25-Jul-2016",
+        '31 16':	"1-Aug-2016",
+        '32 16':	"8-Aug-2016",
+        '33 16':	"15-Aug-2016",
+        '34 16':	"22-Aug-2016",
+        '35 16':	"29-Aug-2016",
+        '36 16':	"5-Sep-2016",
+        '37 16':	"12-Sep-2016",
+        '38 16':	"19-Sep-2016",
+        '39 16':	"26-Sep-2016",
+        '40 16':	"3-Oct-2016",
+        '41 16':	"10-Oct-2016",
+        '42 16':	"17-Oct-2016",
+        '43 16':	"24-Oct-2016",
+        '44 16':	"31-Oct-2016",
+        '45 16':	"7-Nov-2016",
+        '46 16':	"14-Nov-2016",
+        '47 16':	"21-Nov-2016",
+        '48 16':	"28-Nov-2016",
+        '49 16':	"5-Dec-2016",
+        '50 16':	"12-Dec-2016",
+        '51 16':	"19-Dec-2016",
+        '52 16':	"26-Dec-2016",
+        '01 17':	"2-Jan-2017",
+        '02 17':	"9-Jan-2017",
+        '03 17':	"16-Jan-20017",
+        '04 17':	"23-Jan-2017",
+        '05 17':	"30-Jan-2017",
+        '06 17':	"6-Feb-2017",
+        '07 17':	"13-Feb-2017",
+        '08 17':	"20-Feb-2017",
+        '09 17':	"27-Feb-2017",
+        '10 17':	"6-Mar-2017",
+        '11 17':	"13-Mar-2017",
+        '12 17':	"20-Mar-2017",
+        '13 17':	"27-Mar-2017",
+        '14 17':	"3-Apr-2017",
+        '15 17':	"10-Apr-2017",
+        '16 17':	"17-Apr-2017",
+        '17 17':	"24-Apr-2017",
+        '18 17':	"1-May-2017",
+        '19 17':	"8-May-2017",
+        '20 17':	"15-May-2017",
+        '21 17':	"22-May-2017",
+        '22 17':	"29-May-2017",
+        '23 17':	"5-Jun-2017",
+        '24 17':	"12-Jun-2017",
+        '25 17':	"19-Jun-2017",
+        '26 17':	"26-Jun-2017",
+        '27 17':	"3-Jul-2017",
+        '28 17':	"10-Jul-2017",
+        '29 17':	"17-Jul-2017",
+        '30 17':	"24-Jul-2017",
+        '31 17':	"31-Jul-2017",
+        '32 17':	"7-Aug-2017",
+        '33 17':	"14-Aug-2017",
+        '34 17':	"21-Aug-2017",
+        '35 17':	"28-Aug-2017",
+        '36 17':	"4-Sep-2017",
+        '37 17':	"11-Sep-2017",
+        '38 17':	"18-Sep-2017",
+        '39 17':	"25-Sep-2017",
+        '40 17':	"2-Oct-2017",
+        '41 17':	"9-Oct-2017",
+        '42 17':	"16-Oct-2017",
+        '43 17':	"23-Oct-2017",
+        '44 17':	"30-Oct-2017",
+        '45 17':	"6-Nov-2017",
+        '46 17':	"13-Nov-2017",
+        '47 17':	"20-Nov-2017",
+        '48 17':	"27-Nov-2017",
+        '49 17':    "4-Dec-2017",
+        '50 17':	"11-Dec-2017",
+        '51 17':	"18-Dec-2017",
+        '52 17':	"25-Dec-2017",
+        '01 18':	"1-Jan-2018",
+        '02 18':	"8-Jan-2018",
+        '03 18':	"15-Jan-2018",
+        '04 18':	"22-Jan-2018",
+        '05 18':	"29-Jan-2018",
+        '06 18':	"5-Feb-2018",
+        '07 18':	"12-Feb-2018",
+        '08 18':	"19-Feb-2018",
+        '09 18':	"26-Feb-2018",
+        '10 18':	"5-Mar-2018",
+        '11 18':	"12-Mar-2018",
+        '12 18':	"19-Mar-2018",
+        '13 18':	"26-Mar-2018",
+        '14 18':	"2-Apr-2018",
+        '15 18':	"9-Apr-2018",
+        '16 18':	"16-Apr-2018",
+        '17 18':	"23-Apr-2018",
+        '18 18':	"30-Apr-2018",
+        '19 18':	"7-May-2018",
+        '20 18':	"14-May-2018",
+        '21 18':	"21-May-2018",
+        '22 18':	"28-May-2018",
+        '23 18':	"4-Jun-2018",
+        '24 18':	"11-Jun-2018",
+        '25 18':	"18-Jun-2018",
+        '26 18':	"25-Jun-2018",
+        '27 18':	"2-Jul-2018",
+        '28 18':	"9-Jul-2018",
+        '29 18':	"16-Jul-2018",
+        '30 18':	"23-Jul-2018",
+        '31 18':	"30-Jul-2018",
+        '32 18':	"6-Aug-2018",
+        '33 18':	"13-Aug-2018",
+        '34 18':	"20-Aug-2018",
+        '35 18':	"27-Aug-2018",
+        '36 18':	"3-Sep-2018",
+        '37 18':	"10-Sep-2018",
+        '38 18':	"17-Sep-2018",
+        '39 18':	"24-Sep-2018",
+        '40 18':	"1-Oct-2018",
+        '41 18':	"8-Oct-2018",
+        '42 18':	"15-Oct-2018",
+        '43 18':	"22-Oct-2018",
+        '44 18':	"29-Oct-2018",
+        '45 18':	"5-Nov-2018",
+        '46 18':	"12-Nov-2018",
+        '47 18':	"19-Nov-2018",
+        '48 18':	"26-Nov-2018",
+        '49 18':	"3-Dec-2018",
+        '50 18':	"10-Dec-2018",
+        '51 18':	"17-Dec-2018",
+        '52 18':	"24-Dec-2018"
+        }
+
+        const _MS_PER_DAY = 1000 * 60 * 60 * 24
+
+        class App extends React.Component {
+        constructor(props) {
+        super(props)
+
+            this.state = {
+                showReport: false,
+                date: '',
+                weekCode: '',
+                weekConverted: '',
+                codeCountry: '',
+                codeConverted: '',
+                countryCode: '',
+                countryConverted: '',
+                partNumberInput: '',
+                lotNumberInput: '',
+                partNumber: '',
+                lotNumber: '',
+                domInput: '',
+                expireDateInput: '',
+                manDate: '',
+                exDate: '',
+                totalShelfLife: '',
+                ninetyPerc: '',
+                ninetyDay: '',
+                seventyPerc: '',
+                seventyDay: '',
+                daysUntil: '',
+                shelfExPerc: '',
+                shelfRePerc: '',
+                shelfExDays: '',
+                shelfReDays: ''
+                
+            }
+
+            this._getDate = this._getDate.bind(this)
+            this._convertWeek = this._convertWeek.bind(this)
+            this._handleChange = this._handleChange.bind(this)
+            this._codeConvert = this._codeConvert.bind(this)
+            this._countryConvert = this._countryConvert.bind(this)
+            this._shelfLifeCalc = this._shelfLifeCalc.bind(this)
+            this._dateDiffInDays = this._dateDiffInDays.bind(this)
+            this._daystoDate = this._daysToDate.bind(this)
+            this._expired = this._expired.bind(this)
+            this._remaining = this._remaining.bind(this)
+            this._percentExpired = this._percentExpired.bind(this)
+            this._percentRemaining = this._percentRemaining.bind(this)
+        }
+
+            componentDidMount() {
+                this._getDate()
+            }
+
+            _handleChange(e) {
+                const target = e.target
+                const value = target.value
+                const name = target.name
+
+                this.setState({ [name]:value })
+            }
+
+            _getDate() {
+            const d = new Date()
+            const year = d.getFullYear()
+            const day = d.getDate()
+            const month = d.getMonth()
+            const monthTranslate = monthText[month]
+            const dateTransform = `${monthTranslate} ${day}, ${year}`
+
+            this.setState({date: dateTransform})
+            }
+
+            _convertWeek() {
+                const { weekCode } = this.state
+                const converted = weekConvert[weekCode]
+
+                converted ? 
+                    this.setState({weekConverted: `Your week code ${weekCode} is ${converted}.`}) :
+                    this.setState({weekConverted: "Oops! something went wrong:("}) 
+            
+                this.setState({weekCode: ""})
+            }
+
+            _codeConvert() {
+                const { codeCountry } = this.state
+                const converted = codeTable[codeCountry]
+
+                converted ?
+                    this.setState({ codeConverted: `Your country code ${codeCountry} is ${converted}.` }) :
+                    this.setState({ codeConverted: `Oops! something went wrong:(` })
+            
+                this.setState({code: ''})
+            }
+            
+            _countryConvert() {
+                const { countryCode } = this.state
+                const converted = countryTable[countryCode]
+
+                converted ?
+                    this.setState({ countryConverted: `Your country ${countryCode} is ${converted}.`}) :
+                    this.setState({ countryConverted: `Oops! something went wrong:(` })        
+            }
+            
+            _dateDiffInDays(day1, day2) {
+            var utc1 = new Date(day1)
+            var utc2 = new Date(day2)
+            var difference = Math.ceil((utc2 - utc1) / _MS_PER_DAY)
+
+            return difference
+            }
+
+            _daysToDate(man, days) {
+            const dateToCal = new Date(man)
+            const cal = new Date(dateToCal.setTime(dateToCal.getTime() + days * 86400000))
+            const month = cal.getMonth() + 1
+            const day = cal.getDate()
+            const year = cal.getFullYear()
+            const calculated = month + "-" + day + "-" + year
+
+            return calculated
+            }
+
+            _expired(date) {
+            const today = new Date()
+            const man = new Date(date)
+            const daysExpired = (today - man) / 86400000
+
+            return daysExpired
+            }
+
+            _remaining(date) {
+            const today = new Date()
+            const ex = new Date(date)
+            const daysRemaining = -(today - ex) / 86400000
+
+            return daysRemaining
+            }
+
+            _percentExpired(shelf, expired) {
+            const calc = expired / shelf
+            const percent = calc * 100
+
+            return percent
+            }
+
+            _percentRemaining(percentEx) {
+            const calc = 100 - percentEx
+
+            return calc
+            }
+
+            _shelfLifeCalc() {
+                const { expireDateInput, domInput, lotNumberInput, partNumberInput } = this.state
+                const { _dateDiffInDays, _daysToDate, _expired, _remaining, _percentExpired, _percentRemaining } = this
+
+                const shelf = _dateDiffInDays(domInput, expireDateInput)
+                const ninety = (shelf * .1).toFixed(2)
+                const seventy = (shelf * .3).toFixed(2)
+                const seventyDate = _daysToDate(domInput, seventy)
+                const ninetyDate = _daysToDate(domInput, ninety)
+                const daysExpired = (_expired(domInput)).toFixed(2)
+                const daysRemaining = (_remaining(expireDateInput)).toFixed(2)
+                const percentEx = (_percentExpired(shelf, daysExpired)).toFixed(2)
+                const percentRe = (_percentRemaining(percentEx)).toFixed(2)
+
+                this.setState({
+                    manDate: domInput,
+                    exDate: expireDateInput,
+                    partNumber: partNumberInput,
+                    lotNumber: lotNumberInput,
+                    totalShelfLife: shelf,
+                    ninetyDay: ninety,
+                    seventyDay: seventy,
+                    ninetyPerc: ninetyDate,
+                    seventyPerc: seventyDate,
+                    shelfExPerc: percentEx,
+                    shelfRePerc: percentRe,
+                    shelfExDays: daysExpired,
+                    shelfReDays: daysRemaining
+                })
+            }
+
+            render() {
+
+            const { 
+                partNumber,
+                lotNumber,
+                showReport,
+                weekCode, 
+                weekConverted, 
+                date, 
+                codeCountry, 
+                codeConverted, 
+                countryCode, 
+                countryConverted,
+                partNumberInput,
+                lotNumberInput,
+                domInput,
+                expireDateInput,
+                manDate,
+                exDate,
+                totalShelfLife,
+                ninetyPerc,
+                ninetyDay,
+                seventyPerc,
+                seventyDay,
+                daysUntil,
+                shelfExPerc,
+                shelfRePerc,
+                shelfExDays,
+                shelfReDays
+            } = this.state
+
+            const { _handleChange, _convertWeek, _codeConvert, _countryConvert, _shelfLifeCalc } = this
+
+                return(
+                   <div>
+      
+                        <nav className="navbar navbar-default">
+                            <div className="container">
+                                <div className="navbar-text navbar-left">
+                                    <h4> <a href="index.html">Quality Control Web Tool</a> </h4>
+                                </div>
+                                <div className="navbar-text navbar-right">
+                                    <h4> Todays Date: {date}</h4>
+                                </div>
+                            </div>
+                        </nav>
+                      
+                       { showReport ?
+                          <div class="container">
+                              <div class="row">
+
+                                  <div class="col-md-4"></div>
+
+                                  <div class="col-md-4">
+                                      <img src="pacBanner.jpg" />
+                                      <h1> Shelf Life Report </h1>
+                                      <h3> Part: <b>{partNumberInput}</b> </h3>
+                                      <h3> Lot: <b>{lotNumberInput}</b> </h3>
+                                      <br />
+                                      <br />
+                                      <table class="table table-stripped table-bordered">
+                                          <tr>
+                                              <th> Manufacture Date </th>
+                                              <td><h5>{manDate}</h5></td>
+                                          </tr>
+                                          <tr>
+                                              <th> Expiration Date </th>
+                                              <td>{exDate}</td>
+                                          </tr>
+                                          <tr>
+                                              <th> Total Shelf Life </th>
+                                              <td>{totalShelfLife}</td>
+                                              <th> Days until % </th>
+                                          </tr>
+                                          <tr>
+                                              <th> 90% Remaining Date </th>
+                                              <td>{ninetyDay}</td>
+                                              <td>{ninetyPerc}</td>
+                                          </tr>
+                                          <tr>
+                                              <th>  70% Remaining Date </th>
+                                              <td>{seventyDay}</td>
+                                              <td>{seventyPerc}</td>
+                                          </tr>
+                                      </table>
+                                      <table class="table table-stripped table-bordered">
+                                          <tr>
+                                              <th> Todays Date: {date}</th>
+                                              <th> Percentage </th>
+                                              <th> Days </th>
+                                          </tr>
+                                          <tr>
+                                              <th> Shelf Life Expired</th>
+                                              <td>{shelfExPerc}</td>
+                                              <td>{shelfExDays}</td>
+                                          </tr>
+                                          <tr>
+                                              <th> Shelf Life Remaining</th>
+                                              <td>{shelfRePerc}</td>
+                                              <td>{shelfReDays}</td>
+                                          </tr>
+                                      </table>
+                                      <button class="btn btn-primary" onClick={() => this.setState({showReport: false})}> Back </button>
+                                  </div>
+                                  <div class="col-md-4"></div>
+                              </div>
+                            </div>
+                        
+                              : <div class="container">
+                                  <div class="row">
+
+                                      <div class="col-md-4">
+                                          <h1> Converters</h1>
+                                          <br />
+
+                                          <h4> Week Code Converter </h4>
+                                          <p> Please enter using the "ww yy" format (i.e. 09 13)</p>
+                                          <input type="text" name="weekCode" value={weekCode} onChange={_handleChange} class="form-control" />
+                                          <br />
+                                          <button class="btn btn-primary" onClick={() => _convertWeek()}> Convert </button>
+                                          <h5>{weekConverted}</h5>
+
+                                          <br />
+
+                                          <h4> Code to Country Converter </h4>
+                                          <p> Please enter using the "XX" format (i.e. AE)</p>
+                                          <input type="text" name="codeCountry" value={codeCountry} onChange={_handleChange} class="form-control" />
+                                          <br />
+                                          <button class="btn btn-primary" onClick={() => _codeConvert()}> Convert </button>
+                                          <h5>{codeConverted}</h5>
+
+                                          <br />
+
+                                          <h4> Country to Code Converter </h4>
+                                          <p> Please capitalize country name (i.e. United States)</p>
+                                          <input type="text" name="countryCode" value={countryCode} onChange={_handleChange} class="form-control" />
+                                          <br />
+                                          <button class="btn btn-primary" onClick={() => _countryConvert()}> Convert </button>
+                                          <h5>{countryConverted}</h5>
+                                      </div>
+
+                                      <div class="col-md-4">
+                                          <h1> Shelf Life Calculator</h1>
+                                          <p> Please use format "mm-dd-yyyy" (i.e 01-01-2018)</p>
+                                          <p><i>*Part and Lot fields only require for report generation*</i></p>
+                                          <br />
+                                          <h4> Part Number </h4>
+                                          <input type="text" name="partNumberInput" value={partNumberInput} onChange={_handleChange} class="form-control" />
+                                          <h4> Lot Number </h4>
+                                          <input type="text" name="lotNumberInput" value={lotNumberInput} onChange={_handleChange} class="form-control" />
+                                          <h4> Manufacturing Date </h4>
+                                          <input type="text" name="domInput" value={domInput} onChange={_handleChange} class="form-control" />
+                                          <h4> Expiration Date </h4>
+                                          <input type="text" name="expireDateInput" value={expireDateInput} onChange={_handleChange} class="form-control" />
+                                          <br />
+                                          <button class="btn btn-primary" id="dateButton" onClick={() => _shelfLifeCalc()}> Calculate </button>
+                                          <h5></h5>
+
+                                          <table class="table table-stripped table-bordered">
+                                              <tr>
+                                                  <th> Manufacture Date </th>
+                                                  <td><h5>{manDate}</h5></td>
+                                              </tr>
+                                              <tr>
+                                                  <th> Expiration Date </th>
+                                                  <td>{exDate}</td>
+                                              </tr>
+                                              <tr>
+                                                  <th> Total Shelf Life </th>
+                                                  <td>{totalShelfLife}</td>
+                                                  <th> Days until % </th>
+                                              </tr>
+                                              <tr>
+                                                  <th> 90% Remaining Date </th>
+                                                  <td>{ninetyPerc}</td>
+                                                  <td>{ninetyDay}</td>
+                                              </tr>
+                                              <tr>
+                                                  <th>  70% Remaining Date </th>
+                                                  <td>{seventyPerc}</td>
+                                                  <td>{seventyDay}</td>
+                                              </tr>
+                                          </table>
+                                          <table class="table table-stripped table-bordered">
+                                              <tr>
+                                                  <th> Todays Date: {date}</th>
+                                                  <th> Percentage </th>
+                                                  <th> Days </th>
+                                              </tr>
+                                              <tr>
+                                                  <th> Shelf Life Expired</th>
+                                                  <td>{shelfExPerc}</td>
+                                                  <td>{shelfExDays}</td>
+                                              </tr>
+                                              <tr>
+                                                  <th> Shelf Life Remaining</th>
+                                                  <td>{shelfRePerc}</td>
+                                                  <td>{shelfReDays}</td>
+                                              </tr>
+                                          </table>
+                                          <button class="btn btn-primary" onClick={() => this.setState({showReport: true})}> Generate Report </button>
+                                          <br />
+                                          <br />
+                                      </div>
+
+                                      <div class="col-md-4">
+                                      </div>
+                                  </div>
+                              </div> }
+
+                              <footer class="footer">
+                                  <div class="container">
+                                      <span class="text-muted">Issues? Contact <a href="mailto:Stephen.Fairris@Panasonic.aero">Stephen.Fairris@Panasonic.aero</a></span>
+                                      <br />
+                                      <br />
+                                  </div>
+                              </footer> 
+                       </div>
+                )
+            }
+        }   
+
+        ReactDOM.render(
+        <App />,
+        document.getElementById('root')
+        )
+
+    </script>
+    <div id="root"></div>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</body>
+</html>
