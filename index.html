@@ -1,12 +1,15 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="x-ua-compatible" content="IE=edge">
-    <title></title>
+    <title>QC Web Tool</title>
     <script src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/7.0.0/polyfill.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://unpkg.com/react-router/umd/react-router.min.js"></script>
+    <script src="https://unpkg.com/react-router-dom/umd/react-router-dom.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-bootstrap/0.32.4/react-bootstrap.min.js"></script>
 </head>
 <body>
     <script type="text/babel">
@@ -839,7 +842,17 @@
 
         const _MS_PER_DAY = 1000 * 60 * 60 * 24
 
-        class App extends React.Component {
+        const Router = window.ReactRouterDOM.BrowserRouter;
+        const Route =  window.ReactRouterDOM.Route;
+        const Link =  window.ReactRouterDOM.Link;
+        const Prompt =  window.ReactRouterDOM.Prompt;
+        const Switch = window.ReactRouterDOM.Switch;
+        const Redirect = window.ReactRouterDOM.Redirect;
+        const Navbar = window.ReactBootstrap.Navbar
+        const Table = window.ReactBootstrap.Table
+        const Alert = window.ReactBootstrap.Alert
+
+        class Calculators extends React.Component {
         constructor(props) {
         super(props)
 
@@ -869,7 +882,9 @@
                 shelfExPerc: '',
                 shelfRePerc: '',
                 shelfExDays: '',
-                shelfReDays: ''
+                shelfReDays: '',
+                expiredSeventy: false,
+                expiredNinety: false,
                 
             }
 
@@ -885,6 +900,7 @@
             this._remaining = this._remaining.bind(this)
             this._percentExpired = this._percentExpired.bind(this)
             this._percentRemaining = this._percentRemaining.bind(this)
+            this._expiredAlert = this._expiredAlert.bind(this)
         }
 
             componentDidMount() {
@@ -991,7 +1007,7 @@
 
             _shelfLifeCalc() {
                 const { expireDateInput, domInput, lotNumberInput, partNumberInput } = this.state
-                const { _dateDiffInDays, _daysToDate, _expired, _remaining, _percentExpired, _percentRemaining } = this
+                const { _dateDiffInDays, _daysToDate, _expired, _remaining, _percentExpired, _percentRemaining, _expiredAlert } = this
 
                 const shelf = _dateDiffInDays(domInput, expireDateInput)
                 const ninety = (shelf * .1).toFixed(2)
@@ -1017,7 +1033,17 @@
                     shelfRePerc: percentRe,
                     shelfExDays: daysExpired,
                     shelfReDays: daysRemaining
-                })
+                }, () => _expiredAlert())
+            }
+
+            _expiredAlert() {
+                const { shelfRePerc } = this.state
+
+                shelfRePerc <= 70 ?
+                this.setState({expiredNinety: true, expiredSeventy: true}) :
+                shelfRePerc <= 90 ?
+                this.setState({expiredNinety: true, expiredSeventy: false }) :
+                this.setState({expiredNinety: false, expiredSeventy: false})            
             }
 
             render() {
@@ -1048,7 +1074,9 @@
                 shelfExPerc,
                 shelfRePerc,
                 shelfExDays,
-                shelfReDays
+                shelfReDays,
+                expiredNinety,
+                expiredSeventy
             } = this.state
 
             const { _handleChange, _convertWeek, _codeConvert, _countryConvert, _shelfLifeCalc } = this
@@ -1056,16 +1084,12 @@
                 return(
                    <div>
       
-                        <nav className="navbar navbar-default">
-                            <div className="container">
-                                <div className="navbar-text navbar-left">
-                                    <h4> <a href="index.html">Quality Control Web Tool</a> </h4>
-                                </div>
-                                <div className="navbar-text navbar-right">
-                                    <h4> Todays Date: {date}</h4>
-                                </div>
-                            </div>
-                        </nav>
+                        <Navbar inverse>
+                            <Navbar.Brand>
+                                <Link to="/"><h4 onClick={() => this.setState({showReport: false})}>Quality Control Web Tool</h4></Link>
+                            </Navbar.Brand>
+                            <Navbar.Text pullRight><h4>Todays Date: {date}</h4></Navbar.Text>
+                        </Navbar>
                       
                        { showReport ?
                           <div class="container">
@@ -1080,32 +1104,34 @@
                                       <h3> Lot: <b>{lotNumberInput}</b> </h3>
                                       <br />
                                       <br />
-                                      <table class="table table-stripped table-bordered">
-                                          <tr>
-                                              <th> Manufacture Date </th>
-                                              <td><h5>{manDate}</h5></td>
-                                          </tr>
-                                          <tr>
-                                              <th> Expiration Date </th>
-                                              <td>{exDate}</td>
-                                          </tr>
-                                          <tr>
-                                              <th> Total Shelf Life </th>
-                                              <td>{totalShelfLife}</td>
-                                              <th> Days until % </th>
-                                          </tr>
-                                          <tr>
-                                              <th> 90% Remaining Date </th>
-                                              <td>{ninetyDay}</td>
-                                              <td>{ninetyPerc}</td>
-                                          </tr>
-                                          <tr>
-                                              <th>  70% Remaining Date </th>
-                                              <td>{seventyDay}</td>
-                                              <td>{seventyPerc}</td>
-                                          </tr>
-                                      </table>
-                                      <table class="table table-stripped table-bordered">
+                                      <Table striped bordered condensed hover>
+                                          <tbody>
+                                              <tr>
+                                                  <th> Manufacture Date </th>
+                                                  <td><h5>{manDate}</h5></td>
+                                              </tr>
+                                              <tr>
+                                                  <th> Expiration Date </th>
+                                                  <td>{exDate}</td>
+                                              </tr>
+                                              <tr>
+                                                  <th> Total Shelf Life </th>
+                                                  <td>{totalShelfLife}</td>
+                                                  <th> Days until % </th>
+                                              </tr>
+                                              <tr>
+                                                  <th> 90% Remaining Date </th>
+                                                  <td>{ninetyDay}</td>
+                                                  <td>{ninetyPerc}</td>
+                                              </tr>
+                                              <tr>
+                                                  <th>  70% Remaining Date </th>
+                                                  <td>{seventyDay}</td>
+                                                  <td>{seventyPerc}</td>
+                                              </tr>
+                                          </tbody>
+                                      </Table>
+                                      <Table striped bordered condensed hover>
                                           <tr>
                                               <th> Todays Date: {date}</th>
                                               <th> Percentage </th>
@@ -1121,7 +1147,10 @@
                                               <td>{shelfRePerc}</td>
                                               <td>{shelfReDays}</td>
                                           </tr>
-                                      </table>
+                                      </Table>
+                                      {expiredNinety && <Alert bsStyle="danger">Less than 90% shelf life, <strong> 1st Stage Rejection</strong> may be required.</Alert>}
+                                      {expiredSeventy && <Alert bsStyle="warning">Less than 70% shelf life, <strong>Shipping Inspection Rejection</strong> may be required.</Alert>}
+
                                       <button class="btn btn-primary" onClick={() => this.setState({showReport: false})}> Back </button>
                                   </div>
                                   <div class="col-md-4"></div>
@@ -1164,7 +1193,7 @@
                                       <div class="col-md-4">
                                           <h1> Shelf Life Calculator</h1>
                                           <p> Please use format "mm-dd-yyyy" (i.e 01-01-2018)</p>
-                                          <p><i>*Part and Lot fields only require for report generation*</i></p>
+                                          <p><i>*Part and Lot fields only required for report generation*</i></p>
                                           <br />
                                           <h4> Part Number </h4>
                                           <input type="text" name="partNumberInput" value={partNumberInput} onChange={_handleChange} class="form-control" />
@@ -1178,7 +1207,8 @@
                                           <button class="btn btn-primary" id="dateButton" onClick={() => _shelfLifeCalc()}> Calculate </button>
                                           <h5></h5>
 
-                                          <table class="table table-stripped table-bordered">
+                                          <Table striped bordered condensed hover>
+                                            <tbody>
                                               <tr>
                                                   <th> Manufacture Date </th>
                                                   <td><h5>{manDate}</h5></td>
@@ -1202,8 +1232,11 @@
                                                   <td>{seventyPerc}</td>
                                                   <td>{seventyDay}</td>
                                               </tr>
-                                          </table>
-                                          <table class="table table-stripped table-bordered">
+                                            </tbody>
+                                          </Table>
+
+                                          <Table striped bordered hover>
+                                            <tbody> 
                                               <tr>
                                                   <th> Todays Date: {date}</th>
                                                   <th> Percentage </th>
@@ -1219,7 +1252,11 @@
                                                   <td>{shelfRePerc}</td>
                                                   <td>{shelfReDays}</td>
                                               </tr>
-                                          </table>
+                                            </tbody>  
+                                          </Table>
+                                          {expiredNinety && <Alert bsStyle="danger">Less than 90% shelf life, <strong> 1st Stage Rejection</strong> may be required.</Alert>}
+                                          {expiredSeventy && <Alert bsStyle="warning">Less than 70% shelf life, <strong>Shipping Inspection Rejection</strong> may be required.</Alert>}
+
                                           <button class="btn btn-primary" onClick={() => this.setState({showReport: true})}> Generate Report </button>
                                           <br />
                                           <br />
@@ -1241,6 +1278,31 @@
                 )
             }
         }   
+
+        class Home extends React.Component {
+            constructor(props) {
+                super(props)
+            }
+
+            render() {
+                return(
+                    <div>
+                        <h1>Hello Chelsey!</h1>
+                        <Link to="/calculators"><button> Click Me</button></Link>
+                    </div>
+                )
+            }
+        }
+
+        const App = () => {
+            return(
+                <Router>
+                    <Switch>
+                        <Route path="/" component={Calculators} />
+                    </Switch>
+                </Router>
+            )
+        }
 
         ReactDOM.render(
         <App />,
